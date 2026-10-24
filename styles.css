@@ -71,7 +71,6 @@ h1,h2,h3{margin:0}
 .hero__title .line:nth-child(3)>span{animation-delay:.24s}
 @keyframes rise{to{transform:none}}
 .hero__cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
-.hero__scroll{position:absolute;right:clamp(1rem,3vw,2.5rem);bottom:2rem;font:700 .7rem var(--mono);letter-spacing:.2em;text-transform:uppercase;writing-mode:vertical-rl;color:var(--muted)}
 
 /* ticker */
 .ticker{background:var(--acc);color:var(--acc-ink);overflow:hidden;padding:.9rem 0;transform:rotate(-1.2deg) scale(1.03);margin:-1rem 0 0}
@@ -222,7 +221,6 @@ h1,h2,h3{margin:0}
   .card__photo{aspect-ratio:1}
   .card__body{border-left:0;border-top:4px solid var(--acc)}
   .foot__in{flex-direction:column;text-align:center}
-  .hero__scroll{display:none}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
