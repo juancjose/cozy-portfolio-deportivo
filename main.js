@@ -105,3 +105,75 @@
     d.querySelectorAll('.rail-btn').forEach(b => b.addEventListener('click', () => rail.scrollBy({ left: +b.dataset.dir * rail.clientWidth * .8 })));
   }
 })();
+
+// cinematic video (YouTube nocookie, sin salir de la página)
+(() => {
+  const d = document, sec = d.getElementById('video');
+  if (!sec) return;
+  const ID = sec.dataset.yt, HOST = 'https://www.youtube-nocookie.com';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const frameBox = d.getElementById('cine-frame');
+  const bPlay = sec.querySelector('.cine__play'), bSound = sec.querySelector('.cine__sound'), bBig = sec.querySelector('.cine__big');
+  const box = d.getElementById('lightbox'), lbFrame = d.getElementById('lightbox-frame');
+  let bg = null, dur = 0, muted = true, inView = false, lbOpen = false;
+  const origin = encodeURIComponent(location.origin);
+  const url = extra => `${HOST}/embed/${ID}?${extra}&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&enablejsapi=1&origin=${origin}`;
+  const make = (src, title) => { const f = d.createElement('iframe'); f.src = src; f.title = title; f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.referrerPolicy = 'strict-origin-when-cross-origin'; return f; };
+  const cmd = (f, func, args = []) => f && f.contentWindow && f.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args }), HOST);
+
+  function loadBg() {
+    if (bg) return;
+    bg = make(url(`autoplay=1&mute=1&controls=0&disablekb=1&fs=0`), 'Video de fondo: Mochila Multi Deporte Cozy Sport');
+    bg.tabIndex = -1; bg.setAttribute('aria-hidden', 'true');
+    bg.addEventListener('load', () => { bg.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 'cine' }), HOST); });
+    frameBox.appendChild(bg);
+  }
+  addEventListener('message', e => {
+    if (e.origin !== HOST || !bg || e.source !== bg.contentWindow) return;
+    let m; try { m = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch { return; }
+    if (!m) return;
+    const info = m.event === 'infoDelivery' && m.info ? m.info : null;
+    if (info && info.duration) dur = info.duration;
+    // loop sin cortes: volvemos al inicio justo antes del final (evita la pantalla final de YouTube)
+    if (info && typeof info.currentTime === 'number' && dur && info.currentTime > dur - 0.4) cmd(bg, 'seekTo', [0, true]);
+    const st = m.event === 'onStateChange' ? m.info : info ? info.playerState : undefined;
+    if (st === 0) { cmd(bg, 'seekTo', [0, true]); cmd(bg, 'playVideo'); }
+    if (st === 1 && !sec.classList.contains('is-playing')) { sec.classList.add('is-playing'); bSound.hidden = false; if (!inView || lbOpen) cmd(bg, 'pauseVideo'); }
+  });
+
+  if (!reduce) {
+    new IntersectionObserver(es => {
+      inView = es[0].isIntersecting;
+      if (inView) loadBg();
+      if (bg && sec.classList.contains('is-playing') && !lbOpen) cmd(bg, inView ? 'playVideo' : 'pauseVideo');
+    }, { rootMargin: '400px 0px' }).observe(sec);
+  } else {
+    bPlay.hidden = false; // sin autoplay: póster + botón que abre el reproductor
+    bPlay.addEventListener('click', () => openBox(bPlay));
+  }
+
+  bSound.addEventListener('click', () => {
+    muted = !muted;
+    if (muted) cmd(bg, 'mute'); else { cmd(bg, 'unMute'); cmd(bg, 'setVolume', [100]); cmd(bg, 'playVideo'); }
+    bSound.setAttribute('aria-pressed', String(!muted));
+    bSound.querySelector('.cine__sound-txt').textContent = muted ? 'Activar sonido' : 'Silenciar';
+  });
+
+  let opener = null;
+  function openBox(from) {
+    opener = from; lbOpen = true;
+    if (bg) cmd(bg, 'pauseVideo');
+    lbFrame.appendChild(make(url('autoplay=1&controls=1&fs=1'), 'Video: Mochila Multi Deporte Cozy Sport'));
+    box.showModal();
+    box.querySelector('.lightbox__x').focus();
+  }
+  function closeBox() { if (box.open) box.close(); }
+  box.addEventListener('close', () => {
+    lbOpen = false; lbFrame.innerHTML = '';
+    if (bg && inView && sec.classList.contains('is-playing')) cmd(bg, 'playVideo');
+    opener && opener.focus();
+  });
+  bBig.addEventListener('click', () => openBox(bBig));
+  box.querySelector('.lightbox__x').addEventListener('click', closeBox);
+  box.addEventListener('click', e => { if (!e.target.closest('.lightbox__box') && !e.target.closest('.lightbox__x')) closeBox(); });
+})();

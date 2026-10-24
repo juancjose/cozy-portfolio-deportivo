@@ -21,6 +21,17 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="jersey-fab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d1d1d"/><stop offset="1" stop-color="#0e0e0e"/></linearGradient>
+    <g id="jersey-body">
+      <path class="jersey__shape" d="M70 10 Q100 24 130 10 L176 30 Q186 34 189 44 L198 84 L163 96 L158 80 L158 200 Q158 204 154 204 L46 204 Q42 204 42 200 L42 80 L37 96 L2 84 L11 44 Q14 34 24 30 Z"/>
+      <path class="jersey__trim" d="M70 10 Q100 24 130 10"/>
+      <path class="jersey__trim" d="M2 84 L37 96 M198 84 L163 96"/>
+      <path class="jersey__stripe" d="M6 70 L41 81 M194 70 L159 81"/>
+    </g>
+  </defs>
+</svg>
 <a class="skip" href="#main">Saltar al contenido</a>
 
 <header class="nav" id="top">
@@ -75,29 +86,64 @@
       <p class="eyebrow">01 — Nosotros</p>
       <h2 class="display h2">Somos un equipo,<br><span class="accent">comprometido a crear tus sueños</span></h2>
     </header>
-    <ol class="process">
-      <li class="process__step reveal">
-        <span class="process__num">01</span>
-        <h3>Tus ideas son nuestro engranaje</h3>
+    <ol class="kit kit--3">
+      <li class="kit__item reveal" style="--i:0">
+        <svg class="jersey" viewBox="0 0 200 210" aria-hidden="true" focusable="false">
+          <use href="#jersey-body"/>
+          <path id="jn-p1" d="M52 66 Q100 54 148 66" fill="none"/>
+          <text class="jersey__name"><textPath href="#jn-p1" startOffset="50%" text-anchor="middle">TUS IDEAS</textPath></text>
+          <text class="jersey__num" x="100" y="176" text-anchor="middle">1</text>
+        </svg>
+        <h3><span class="sr">Paso 1: </span>Tus ideas son nuestro engranaje</h3>
         <p>Tus dibujos, imágenes, colores, todo lo que te inspire nos sirve para conocerte y llevar a cabo nuestro mejor trabajo!</p>
       </li>
-      <li class="process__step reveal">
-        <span class="process__num">02</span>
-        <h3>Imagen</h3>
+      <li class="kit__item reveal" style="--i:1">
+        <svg class="jersey" viewBox="0 0 200 210" aria-hidden="true" focusable="false">
+          <use href="#jersey-body"/>
+          <path id="jn-p2" d="M52 66 Q100 54 148 66" fill="none"/>
+          <text class="jersey__name"><textPath href="#jn-p2" startOffset="50%" text-anchor="middle">IMAGEN</textPath></text>
+          <text class="jersey__num" x="100" y="176" text-anchor="middle">2</text>
+        </svg>
+        <h3><span class="sr">Paso 2: </span>Imagen</h3>
         <p>Desarrollaremos un outfit de lo que nos transmitiste: antes que algo se imprima, lo tenés que ver como lo soñaste.</p>
       </li>
-      <li class="process__step reveal">
-        <span class="process__num">03</span>
-        <h3>Despegue</h3>
+      <li class="kit__item reveal" style="--i:2">
+        <svg class="jersey" viewBox="0 0 200 210" aria-hidden="true" focusable="false">
+          <use href="#jersey-body"/>
+          <path id="jn-p3" d="M52 66 Q100 54 148 66" fill="none"/>
+          <text class="jersey__name"><textPath href="#jn-p3" startOffset="50%" text-anchor="middle">DESPEGUE</textPath></text>
+          <text class="jersey__num" x="100" y="176" text-anchor="middle">3</text>
+        </svg>
+        <h3><span class="sr">Paso 3: </span>Despegue</h3>
         <p>Una vez que está todo aprobado, despegamos con todos los departamentos de Cozy, para que el producto salga en tiempo y forma. ¡Siempre cuidando los detalles!</p>
       </li>
     </ol>
-    <a class="video reveal" href="https://www.youtube.com/watch?v=ziSR-mGUtW4" target="_blank" rel="noopener">
-      <img src="assets/mochila_1100.webp" alt="Deportista con mochila de triatlón Cozy Sport" loading="lazy">
-      <span class="video__label"><span class="video__play" aria-hidden="true">▶</span><span><strong class="display">Indumentaria y accesorios</strong><em>Todo lo que necesites — Ver video</em></span></span>
-    </a>
   </div>
 </section>
+
+<!-- VIDEO -->
+<section class="cine" id="video" aria-labelledby="cine-title" data-yt="ziSR-mGUtW4">
+  <div class="cine__media">
+    <img class="cine__poster" src="assets/mochila_1100.webp" alt="" loading="lazy">
+    <div class="cine__frame" id="cine-frame"></div>
+  </div>
+  <div class="cine__shade" aria-hidden="true"></div>
+  <div class="cine__content wrap">
+    <p class="eyebrow">En movimiento</p>
+    <h2 id="cine-title" class="display cine__title">Indumentaria <span class="accent">y accesorios</span></h2>
+    <p class="cine__sub">¡Todo lo que necesites!</p>
+    <div class="cine__btns">
+      <button class="btn btn--sm cine__play" type="button" hidden><span aria-hidden="true">▶</span> Reproducir</button>
+      <button class="btn btn--sm btn--ghost cine__sound" type="button" aria-pressed="false" hidden><span class="cine__sound-ico" aria-hidden="true">♪</span> <span class="cine__sound-txt">Activar sonido</span></button>
+      <button class="btn btn--sm btn--ghost cine__big" type="button"><span aria-hidden="true">⤢</span> Ver en grande</button>
+    </div>
+  </div>
+</section>
+
+<dialog class="lightbox" id="lightbox" aria-label="Video de Cozy Sport">
+  <button class="lightbox__x" type="button" aria-label="Cerrar video">✕</button>
+  <div class="lightbox__box"><div class="lightbox__frame" id="lightbox-frame"></div></div>
+</dialog>
 
 <!-- SERVICIOS -->
 <section id="servicios" class="section section--alt">
@@ -106,12 +152,57 @@
       <p class="eyebrow">02 — Nuestro servicio</p>
       <h2 class="display h2">Brindando el <span class="accent">mejor servicio</span></h2>
     </header>
-    <div class="services">
-      <article class="service reveal"><span class="service__i">A</span><h3>Diseños personalizados</h3><p>Pasamos tus ideas a formato digital.</p></article>
-      <article class="service reveal"><span class="service__i">B</span><h3>Bocetos</h3><p>Bocetos a mano alzada, siempre buscando nuevas tendencias.</p></article>
-      <article class="service reveal"><span class="service__i">C</span><h3>La meta</h3><p>Llegar a la meta, cumpliendo con tus expectativas.</p></article>
-      <article class="service reveal"><span class="service__i">D</span><h3>Volamos a tu lado</h3><p>Estamos juntos en este viaje, ¡desde el primer momento hasta la competencia!</p></article>
-      <article class="service reveal"><span class="service__i">E</span><h3>El color que esperás</h3><p>Utilizamos las mejores tintas del mercado, para llegar al color que imaginaste.</p></article>
+    <div class="kit kit--5">
+      <article class="kit__item reveal" style="--i:0">
+        <svg class="jersey" viewBox="0 0 200 210" aria-hidden="true" focusable="false">
+          <use href="#jersey-body"/>
+          <path id="jn-s1" d="M52 66 Q100 54 148 66" fill="none"/>
+          <text class="jersey__name"><textPath href="#jn-s1" startOffset="50%" text-anchor="middle">DISEÑOS</textPath></text>
+          <text class="jersey__num" x="100" y="176" text-anchor="middle">1</text>
+        </svg>
+        <h3>Diseños personalizados</h3>
+        <p>Pasamos tus ideas a formato digital.</p>
+      </article>
+      <article class="kit__item reveal" style="--i:1">
+        <svg class="jersey" viewBox="0 0 200 210" aria-hidden="true" focusable="false">
+          <use href="#jersey-body"/>
+          <path id="jn-s2" d="M52 66 Q100 54 148 66" fill="none"/>
+          <text class="jersey__name"><textPath href="#jn-s2" startOffset="50%" text-anchor="middle">BOCETOS</textPath></text>
+          <text class="jersey__num" x="100" y="176" text-anchor="middle">2</text>
+        </svg>
+        <h3>Bocetos</h3>
+        <p>Bocetos a mano alzada, siempre buscando nuevas tendencias.</p>
+      </article>
+      <article class="kit__item reveal" style="--i:2">
+        <svg class="jersey" viewBox="0 0 200 210" aria-hidden="true" focusable="false">
+          <use href="#jersey-body"/>
+          <path id="jn-s3" d="M52 66 Q100 54 148 66" fill="none"/>
+          <text class="jersey__name"><textPath href="#jn-s3" startOffset="50%" text-anchor="middle">LA META</textPath></text>
+          <text class="jersey__num" x="100" y="176" text-anchor="middle">3</text>
+        </svg>
+        <h3>La meta</h3>
+        <p>Llegar a la meta, cumpliendo con tus expectativas.</p>
+      </article>
+      <article class="kit__item reveal" style="--i:3">
+        <svg class="jersey" viewBox="0 0 200 210" aria-hidden="true" focusable="false">
+          <use href="#jersey-body"/>
+          <path id="jn-s4" d="M52 66 Q100 54 148 66" fill="none"/>
+          <text class="jersey__name"><textPath href="#jn-s4" startOffset="50%" text-anchor="middle">VOLAMOS</textPath></text>
+          <text class="jersey__num" x="100" y="176" text-anchor="middle">4</text>
+        </svg>
+        <h3>Volamos a tu lado</h3>
+        <p>Estamos juntos en este viaje, ¡desde el primer momento hasta la competencia!</p>
+      </article>
+      <article class="kit__item reveal" style="--i:4">
+        <svg class="jersey" viewBox="0 0 200 210" aria-hidden="true" focusable="false">
+          <use href="#jersey-body"/>
+          <path id="jn-s5" d="M52 66 Q100 54 148 66" fill="none"/>
+          <text class="jersey__name"><textPath href="#jn-s5" startOffset="50%" text-anchor="middle">COLOR</textPath></text>
+          <text class="jersey__num" x="100" y="176" text-anchor="middle">5</text>
+        </svg>
+        <h3>El color que esperás</h3>
+        <p>Utilizamos las mejores tintas del mercado, para llegar al color que imaginaste.</p>
+      </article>
     </div>
   </div>
 </section>
