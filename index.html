@@ -122,10 +122,11 @@
 </section>
 
 <!-- VIDEO -->
-<section class="cine" id="video" aria-labelledby="cine-title" data-yt="ziSR-mGUtW4">
+<section class="cine" id="video" aria-labelledby="cine-title">
   <div class="cine__media">
-    <img class="cine__poster" src="assets/mochila_1100.webp" alt="" loading="lazy">
-    <div class="cine__frame" id="cine-frame"></div>
+    <img class="cine__poster" src="assets/cozy-mochila-poster.webp" alt="" loading="lazy">
+    <video class="cine__video" id="cine-video" muted loop playsinline preload="none" poster="assets/cozy-mochila-poster.webp" aria-hidden="true" tabindex="-1"
+      data-mp4="assets/cozy-mochila.mp4" data-webm="assets/cozy-mochila.webm"></video>
   </div>
   <div class="cine__shade" aria-hidden="true"></div>
   <div class="cine__content wrap">
@@ -142,7 +143,7 @@
 
 <dialog class="lightbox" id="lightbox" aria-label="Video de Cozy Sport">
   <button class="lightbox__x" type="button" aria-label="Cerrar video">✕</button>
-  <div class="lightbox__box"><div class="lightbox__frame" id="lightbox-frame"></div></div>
+  <div class="lightbox__box"><video class="lightbox__video" id="lightbox-video" controls loop playsinline preload="none" poster="assets/cozy-mochila-poster.webp" aria-label="Video: Mochila Multi Deporte Cozy Sport"></video></div>
 </dialog>
 
 <!-- SERVICIOS -->
