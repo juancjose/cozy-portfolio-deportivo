@@ -124,3 +124,15 @@
   }, { rootMargin: '300px 0px' }).observe(sec);
   d.addEventListener('visibilitychange', () => { if (!loaded) return; (d.hidden || !inView) ? v.pause() : play(); });
 })();
+
+// volver arriba: el ancla #top apuntaba al header fijo (position:fixed), que no genera scroll
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('a[href="#top"]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: reduce.matches ? 'auto' : 'smooth' });
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    const logo = document.querySelector('.nav__logo');
+    if (logo && a !== logo) logo.focus({ preventScroll: true });
+  }));
+})();
