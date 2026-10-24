@@ -170,6 +170,8 @@ h1,h2,h3{margin:0}
 .ath p{margin:.5rem 0 0;color:#d6d6d6;font-size:.92rem;line-height:1.4;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .4s}
 .ath:hover img,.ath:focus-within img{transform:scale(1.06);filter:none}
 .ath:hover p,.ath:focus-within p{max-height:6em;opacity:1}
+.rail.is-auto{scroll-snap-type:none;scrollbar-width:none}
+.rail.is-auto::-webkit-scrollbar{display:none}
 @media(hover:none){.ath p{max-height:none;opacity:1}.ath img{filter:none}}
 
 /* contact */

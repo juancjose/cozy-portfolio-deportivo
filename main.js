@@ -65,6 +65,43 @@
 
   // athletes rail
   const rail = d.getElementById('rail');
-  d.querySelectorAll('.rail-btn').forEach(b => b.addEventListener('click', () => rail.scrollBy({ left: +b.dataset.dir * rail.clientWidth * .8, behavior: reduce ? 'auto' : 'smooth' })));
-  rail.querySelectorAll('.ath').forEach(li => li.tabIndex = 0);
+  const items = [...rail.children];
+  items.forEach(li => li.tabIndex = 0);
+  let period = 0, pos = 0, last = 0, hold = 0, hover = false, focus = false, visible = true;
+  const SPEED = 45; // px por segundo
+  if (!reduce) {
+    rail.classList.add('is-auto');
+    items.forEach(li => { const c = li.cloneNode(true); c.setAttribute('aria-hidden', 'true'); c.removeAttribute('tabindex'); c.querySelector('img').alt = ''; rail.appendChild(c); });
+    const measure = () => { period = rail.children[items.length].offsetLeft - items[0].offsetLeft; };
+    measure(); addEventListener('resize', measure);
+    addEventListener('load', measure);
+    const wrap = () => { if (period) { if (rail.scrollLeft >= period + rail.clientWidth) rail.scrollLeft -= period; else if (rail.scrollLeft <= 0) rail.scrollLeft += period; } };
+    rail.addEventListener('mouseenter', () => hover = true);
+    rail.addEventListener('mouseleave', () => hover = false);
+    rail.addEventListener('focusin', () => focus = true);
+    rail.addEventListener('focusout', () => focus = false);
+    const pauseFor = ms => hold = performance.now() + ms;
+    rail.addEventListener('pointerdown', () => pauseFor(4000));
+    rail.addEventListener('touchstart', () => pauseFor(4000), { passive: true });
+    rail.addEventListener('wheel', () => pauseFor(2500), { passive: true });
+    rail.addEventListener('scroll', () => { if (performance.now() < hold) wrap(); }, { passive: true });
+    new IntersectionObserver(es => visible = es[0].isIntersecting).observe(rail);
+    const tick = t => {
+      const dt = last ? Math.min(t - last, 64) / 1000 : 0; last = t;
+      const paused = hover || focus || !visible || t < hold || d.hidden;
+      if (paused) pos = rail.scrollLeft;
+      else if (period) { pos += SPEED * dt; if (pos >= period) pos -= period; rail.scrollLeft = pos; }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    d.querySelectorAll('.rail-btn').forEach(b => b.addEventListener('click', () => {
+      pauseFor(1200);
+      const step = +b.dataset.dir * rail.clientWidth * .8;
+      if (step < 0 && rail.scrollLeft + step < 0) rail.scrollLeft += period;
+      if (step > 0 && rail.scrollLeft + step >= period) rail.scrollLeft -= period;
+      rail.scrollBy({ left: step, behavior: 'smooth' });
+    }));
+  } else {
+    d.querySelectorAll('.rail-btn').forEach(b => b.addEventListener('click', () => rail.scrollBy({ left: +b.dataset.dir * rail.clientWidth * .8 })));
+  }
 })();
