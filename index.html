@@ -75,20 +75,20 @@
       <p class="eyebrow">01 — Nosotros</p>
       <h2 class="display h2">Somos un equipo,<br><span class="accent">comprometido a crear tus sueños</span></h2>
     </header>
-    <ol class="rows">
-      <li class="rows__item reveal" style="--i:0" tabindex="0">
-        <span class="rows__num" aria-hidden="true">01</span>
-        <h3><span class="sr">Paso 1: </span>Tus ideas son nuestro engranaje</h3>
+    <ol class="process">
+      <li class="process__step reveal">
+        <span class="process__num">01</span>
+        <h3>Tus ideas son nuestro engranaje</h3>
         <p>Tus dibujos, imágenes, colores, todo lo que te inspire nos sirve para conocerte y llevar a cabo nuestro mejor trabajo!</p>
       </li>
-      <li class="rows__item reveal" style="--i:1" tabindex="0">
-        <span class="rows__num" aria-hidden="true">02</span>
-        <h3><span class="sr">Paso 2: </span>Imagen</h3>
+      <li class="process__step reveal">
+        <span class="process__num">02</span>
+        <h3>Imagen</h3>
         <p>Desarrollaremos un outfit de lo que nos transmitiste: antes que algo se imprima, lo tenés que ver como lo soñaste.</p>
       </li>
-      <li class="rows__item reveal" style="--i:2" tabindex="0">
-        <span class="rows__num" aria-hidden="true">03</span>
-        <h3><span class="sr">Paso 3: </span>Despegue</h3>
+      <li class="process__step reveal">
+        <span class="process__num">03</span>
+        <h3>Despegue</h3>
         <p>Una vez que está todo aprobado, despegamos con todos los departamentos de Cozy, para que el producto salga en tiempo y forma. ¡Siempre cuidando los detalles!</p>
       </li>
     </ol>
@@ -96,21 +96,19 @@
 </section>
 
 <!-- VIDEO -->
-<section class="cine section" id="video" aria-labelledby="cine-title">
-  <div class="wrap cine__grid">
-    <div class="cine__content reveal">
-      <p class="eyebrow">En movimiento</p>
-      <h2 id="cine-title" class="display cine__title">Indumentaria <span class="accent">y accesorios</span></h2>
-      <p class="cine__sub">¡Todo lo que necesites!</p>
-    </div>
-    <figure class="cine__frame reveal">
-      <img class="cine__poster" src="assets/cozy-mochila-poster.webp" alt="Mochila Multi Deporte Cozy Sport" width="1200" height="1200" loading="lazy">
-      <video class="cine__video" id="cine-video" muted loop playsinline preload="none" poster="assets/cozy-mochila-poster.webp" aria-hidden="true" tabindex="-1" width="1200" height="1200"
-        data-mp4="assets/cozy-mochila.mp4" data-webm="assets/cozy-mochila.webm"></video>
-    </figure>
+<section class="cine" id="video" aria-labelledby="cine-title">
+  <div class="cine__media" aria-hidden="true">
+    <img class="cine__poster" src="assets/cozy-mochila-poster.webp" alt="" loading="lazy">
+    <video class="cine__video" id="cine-video" muted loop playsinline preload="none" poster="assets/cozy-mochila-poster.webp" tabindex="-1"
+      data-mp4="assets/cozy-mochila.mp4" data-webm="assets/cozy-mochila.webm"></video>
+  </div>
+  <div class="cine__shade" aria-hidden="true"></div>
+  <div class="cine__content wrap">
+    <p class="eyebrow">En movimiento</p>
+    <h2 id="cine-title" class="display cine__title">Indumentaria <span class="accent">y accesorios</span></h2>
+    <p class="cine__sub">¡Todo lo que necesites!</p>
   </div>
 </section>
-
 
 <!-- SERVICIOS -->
 <section id="servicios" class="section section--alt">
@@ -119,32 +117,12 @@
       <p class="eyebrow">02 — Nuestro servicio</p>
       <h2 class="display h2">Brindando el <span class="accent">mejor servicio</span></h2>
     </header>
-    <div class="rows">
-      <article class="rows__item reveal" style="--i:0" tabindex="0">
-        <span class="rows__num" aria-hidden="true">01</span>
-        <h3>Diseños personalizados</h3>
-        <p>Pasamos tus ideas a formato digital.</p>
-      </article>
-      <article class="rows__item reveal" style="--i:1" tabindex="0">
-        <span class="rows__num" aria-hidden="true">02</span>
-        <h3>Bocetos</h3>
-        <p>Bocetos a mano alzada, siempre buscando nuevas tendencias.</p>
-      </article>
-      <article class="rows__item reveal" style="--i:2" tabindex="0">
-        <span class="rows__num" aria-hidden="true">03</span>
-        <h3>La meta</h3>
-        <p>Llegar a la meta, cumpliendo con tus expectativas.</p>
-      </article>
-      <article class="rows__item reveal" style="--i:3" tabindex="0">
-        <span class="rows__num" aria-hidden="true">04</span>
-        <h3>Volamos a tu lado</h3>
-        <p>Estamos juntos en este viaje, ¡desde el primer momento hasta la competencia!</p>
-      </article>
-      <article class="rows__item reveal" style="--i:4" tabindex="0">
-        <span class="rows__num" aria-hidden="true">05</span>
-        <h3>El color que esperás</h3>
-        <p>Utilizamos las mejores tintas del mercado, para llegar al color que imaginaste.</p>
-      </article>
+    <div class="services">
+      <article class="service reveal"><span class="service__i">A</span><h3>Diseños personalizados</h3><p>Pasamos tus ideas a formato digital.</p></article>
+      <article class="service reveal"><span class="service__i">B</span><h3>Bocetos</h3><p>Bocetos a mano alzada, siempre buscando nuevas tendencias.</p></article>
+      <article class="service reveal"><span class="service__i">C</span><h3>La meta</h3><p>Llegar a la meta, cumpliendo con tus expectativas.</p></article>
+      <article class="service reveal"><span class="service__i">D</span><h3>Volamos a tu lado</h3><p>Estamos juntos en este viaje, ¡desde el primer momento hasta la competencia!</p></article>
+      <article class="service reveal"><span class="service__i">E</span><h3>El color que esperás</h3><p>Utilizamos las mejores tintas del mercado, para llegar al color que imaginaste.</p></article>
     </div>
   </div>
 </section>
