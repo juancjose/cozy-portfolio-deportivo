@@ -42,7 +42,9 @@ h1,h2,h3{margin:0}
 /* nav */
 .nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:.9rem clamp(1.1rem,4vw,2.5rem);transition:background .3s,backdrop-filter .3s}
 .nav.is-solid{background:rgba(10,10,10,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav__logo img{height:38px;width:auto}
+.nav__logo{display:block}
+.nav__logo img{height:24px;width:auto;display:block}
+.foot__logo{height:22px;width:auto}
 .nav__menu{display:flex;align-items:center;gap:1.6rem}
 .nav__menu a:not(.btn){font:500 .82rem/1 var(--sans);text-transform:uppercase;letter-spacing:.1em;text-decoration:none;color:#d9d9d9;position:relative}
 .nav__menu a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:100%;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
@@ -58,12 +60,12 @@ h1,h2,h3{margin:0}
 .hero__slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity 1.4s ease,transform 7s linear;z-index:-2}
 .hero__slides img.is-on{opacity:1;transform:scale(1)}
 .hero__shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,10,10,.55) 0%,rgba(10,10,10,.15) 35%,rgba(10,10,10,.92) 85%,var(--bg) 100%),linear-gradient(90deg,rgba(10,10,10,.75),transparent 70%)}
-.hero__content{padding:0 clamp(1.1rem,4vw,2.5rem) clamp(3rem,8vh,6rem);width:100%;max-width:1500px;margin:0 auto}
+.hero__content{padding:0 clamp(1.1rem,4vw,2.5rem) clamp(4.5rem,10svh,7rem);width:100%;max-width:1500px;margin:0 auto}
 .kicker{font:700 .78rem/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:.6rem;margin:0 0 1.2rem}
 .dot{width:10px;height:10px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 0 var(--acc);animation:pulse 1.8s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 12px rgba(198,255,26,0)}100%{box-shadow:0 0 0 0 rgba(198,255,26,0)}}
-.hero__title{font-size:clamp(4.2rem,min(19vw,24svh),17rem);line-height:.82}
-.hero__title .line{display:block;overflow:hidden}
+.hero__title{font-size:clamp(3.6rem,min(19vw,20svh),17rem);line-height:.9}
+.hero__title .line{display:block;overflow:hidden;padding:.04em 0 .06em;margin:-.04em 0 -.06em}
 .hero__title .line>span{display:inline-block;transform:translateY(105%);animation:rise 1s var(--ease) forwards}
 .hero__title .line:nth-child(2)>span{animation-delay:.12s}
 .hero__title .line:nth-child(3)>span{animation-delay:.24s}
