@@ -96,29 +96,21 @@
 </section>
 
 <!-- VIDEO -->
-<section class="cine" id="video" aria-labelledby="cine-title">
-  <div class="cine__media">
-    <img class="cine__poster" src="assets/cozy-mochila-poster.webp" alt="" loading="lazy">
-    <video class="cine__video" id="cine-video" muted loop playsinline preload="none" poster="assets/cozy-mochila-poster.webp" aria-hidden="true" tabindex="-1"
-      data-mp4="assets/cozy-mochila.mp4" data-webm="assets/cozy-mochila.webm"></video>
-  </div>
-  <div class="cine__shade" aria-hidden="true"></div>
-  <div class="cine__content wrap">
-    <p class="eyebrow">En movimiento</p>
-    <h2 id="cine-title" class="display cine__title">Indumentaria <span class="accent">y accesorios</span></h2>
-    <p class="cine__sub">¡Todo lo que necesites!</p>
-    <div class="cine__btns">
-      <button class="btn btn--sm cine__play" type="button" hidden><span aria-hidden="true">▶</span> Reproducir</button>
-      <button class="btn btn--sm btn--ghost cine__sound" type="button" aria-pressed="false" hidden><span class="cine__sound-ico" aria-hidden="true">♪</span> <span class="cine__sound-txt">Activar sonido</span></button>
-      <button class="btn btn--sm btn--ghost cine__big" type="button"><span aria-hidden="true">⤢</span> Ver en grande</button>
+<section class="cine section" id="video" aria-labelledby="cine-title">
+  <div class="wrap cine__grid">
+    <div class="cine__content reveal">
+      <p class="eyebrow">En movimiento</p>
+      <h2 id="cine-title" class="display cine__title">Indumentaria <span class="accent">y accesorios</span></h2>
+      <p class="cine__sub">¡Todo lo que necesites!</p>
     </div>
+    <figure class="cine__frame reveal">
+      <img class="cine__poster" src="assets/cozy-mochila-poster.webp" alt="Mochila Multi Deporte Cozy Sport" width="1200" height="1200" loading="lazy">
+      <video class="cine__video" id="cine-video" muted loop playsinline preload="none" poster="assets/cozy-mochila-poster.webp" aria-hidden="true" tabindex="-1" width="1200" height="1200"
+        data-mp4="assets/cozy-mochila.mp4" data-webm="assets/cozy-mochila.webm"></video>
+    </figure>
   </div>
 </section>
 
-<dialog class="lightbox" id="lightbox" aria-label="Video de Cozy Sport">
-  <button class="lightbox__x" type="button" aria-label="Cerrar video">✕</button>
-  <div class="lightbox__box"><video class="lightbox__video" id="lightbox-video" controls loop playsinline preload="none" poster="assets/cozy-mochila-poster.webp" aria-label="Video: Mochila Multi Deporte Cozy Sport"></video></div>
-</dialog>
 
 <!-- SERVICIOS -->
 <section id="servicios" class="section section--alt">

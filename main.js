@@ -106,59 +106,21 @@
   }
 })();
 
-// cinematic video (self-hosted, se reproduce dentro de la página)
+// video: loop ambiente silencioso (self-hosted)
 (() => {
-  const d = document, sec = d.getElementById('video');
-  if (!sec) return;
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const v = d.getElementById('cine-video'), lv = d.getElementById('lightbox-video');
-  const bPlay = sec.querySelector('.cine__play'), bSound = sec.querySelector('.cine__sound'), bBig = sec.querySelector('.cine__big');
-  const box = d.getElementById('lightbox');
-  let loaded = false, inView = false, lbOpen = false, opener = null;
-  const addSources = el => {
-    if (el.querySelector('source')) return;
-    [['webm', 'video/webm'], ['mp4', 'video/mp4']].forEach(([k, type]) => { const s = d.createElement('source'); s.src = v.dataset[k]; s.type = type; el.appendChild(s); });
-    el.load();
-  };
-  const tryPlay = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
-  v.addEventListener('playing', () => { sec.classList.add('is-playing'); bSound.hidden = false; });
-
-  if (!reduce) {
-    new IntersectionObserver(es => {
-      inView = es[0].isIntersecting;
-      if (inView && !loaded) { loaded = true; addSources(v); }
-      if (!loaded || lbOpen) return;
-      inView ? tryPlay() : v.pause();
-    }, { rootMargin: '300px 0px' }).observe(sec);
-  } else {
-    bPlay.hidden = false; // sin autoplay: póster + botón que abre el reproductor
-    bPlay.addEventListener('click', () => openBox(bPlay));
-  }
-
-  bSound.addEventListener('click', () => {
-    v.muted = !v.muted;
-    if (!v.muted) { v.volume = 1; tryPlay(); }
-    bSound.setAttribute('aria-pressed', String(!v.muted));
-    bSound.querySelector('.cine__sound-txt').textContent = v.muted ? 'Activar sonido' : 'Silenciar';
-  });
-
-  function openBox(from) {
-    opener = from; lbOpen = true;
-    v.pause();
-    addSources(lv);
-    try { lv.currentTime = reduce ? 0 : v.currentTime || 0; } catch {}
-    box.showModal();
-    box.querySelector('.lightbox__x').focus();
-    lv.muted = false;
-    const p = lv.play(); if (p && p.catch) p.catch(() => {});
-  }
-  const closeBox = () => { if (box.open) box.close(); };
-  box.addEventListener('close', () => {
-    lbOpen = false; lv.pause();
-    if (loaded && inView) tryPlay();
-    opener && opener.focus();
-  });
-  bBig.addEventListener('click', () => openBox(bBig));
-  box.querySelector('.lightbox__x').addEventListener('click', closeBox);
-  box.addEventListener('click', e => { if (e.target === box) closeBox(); });
+  const d = document, sec = d.getElementById('video'), v = d.getElementById('cine-video');
+  if (!sec || !v || matchMedia('(prefers-reduced-motion: reduce)').matches) return; // reduced motion: queda la imagen fija
+  let loaded = false, inView = false;
+  const play = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+  v.addEventListener('playing', () => sec.classList.add('is-playing'));
+  new IntersectionObserver(([e]) => {
+    inView = e.isIntersecting;
+    if (e.isIntersecting && !loaded) {
+      loaded = true;
+      [['webm', 'video/webm'], ['mp4', 'video/mp4']].forEach(([k, type]) => { const s = d.createElement('source'); s.src = v.dataset[k]; s.type = type; v.appendChild(s); });
+      v.load();
+    }
+    if (loaded) e.isIntersecting && !d.hidden ? play() : v.pause();
+  }, { rootMargin: '300px 0px' }).observe(sec);
+  d.addEventListener('visibilitychange', () => { if (!loaded) return; (d.hidden || !inView) ? v.pause() : play(); });
 })();
